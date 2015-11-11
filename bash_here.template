@@ -1,0 +1,4 @@
+@echo off
+@echo Swithching to %*
+SET destdir=%*
+C:\Windows\System32\cmd.exe /U /Q /K {SHELL_PATH_WIN} -c 'cd "${destdir}"; exec bash --init-file ~/.bash_profile'

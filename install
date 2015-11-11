@@ -1,0 +1,98 @@
+#!/usr/bin/bash
+
+# By Yifei Zhang, Nov. 12 2015
+# Read LICENSE file before use
+
+# Colors
+ESC_SEQ="\e["
+COL_RESET=$ESC_SEQ"0m"
+COL_RED=$ESC_SEQ"31m"
+COL_GREEN=$ESC_SEQ"32m"
+COL_YELLOW=$ESC_SEQ"33m"
+COL_BLUE=$ESC_SEQ"34m"
+COL_MAGENTA=$ESC_SEQ"35m"
+COL_CYAN=$ESC_SEQ"36m"
+COL_WHITE=$ESC_SEQ"97m"
+
+# warning
+echo -e "${COL_RED}WARNING: THIS SCRIPT WILL OVERWRITE SOME .bat FILES IN THE"
+echo -e "CURRENT DIRECTORY. PLEASE BACKUP BEFORE USE${COL_RESET}"
+
+echo -e "${COL_CYAN}"
+echo -e "[ msys2/mingw right-click shortcut menu ]"
+echo -e "[        Yifei Zhang, Nov 2015          ]"
+echo -e "${COL_RESET}"
+
+echo -e "${COL_WHITE}Checking environment...${COL_RESET}"
+if ! ( \
+    [ -s install ] && \
+    [ -s bash_here.template ] && \
+    [ -s reg.template ] && \
+    [ -s reg_mingw64.template ] && \
+    [ -s reg_mingw32.template ] && \
+    [ -s reg_msys2.template ]); then
+    echo -e "${COL_RED}Error! Cannot find some of the required files!"
+    echo -e "Please run this script from its directory${COL_RESET}"
+    exit 1
+fi
+
+MSYS2_INSTALL_DIR=$({ cd / && pwd -W; } | sed 's|/|\\\\|g')
+PWD_WIN_ESCAPED=$(pwd -W | sed -e 's|/|\\\\|g')\\\\
+echo "MSYS Install Path is"
+echo -e "${MSYS2_INSTALL_DIR}"
+echo "Current Directory is"
+echo -e "${PWD_WIN_ESCAPED}"
+
+echo
+read -p "Correct? (y/n)" option
+echo
+
+if [[ ! $option =~ [yY](es)* ]]; then
+    exit 0
+fi
+
+echo -e -n "${COL_WHITE}Generating scripts...${COL_RESET}"
+
+MINGW32_SHELL="mingw32_shell.bat"
+MINGW64_SHELL="mingw64_shell.bat"
+MSYS2_SHELL="msys2_shell.bat"
+
+MINGW32_HERE="mingw32_here.bat"
+MINGW64_HERE="mingw64_here.bat"
+MSYS2_HERE="msys2_here.bat"
+
+REG_FILE="install_right_click_menu.reg"
+
+MINGW32_SHELL_PATH="${MSYS2_INSTALL_DIR}${MINGW32_SHELL}"
+MINGW64_SHELL_PATH="${MSYS2_INSTALL_DIR}${MINGW64_SHELL}"
+MSYS2_SHELL_PATH="${MSYS2_INSTALL_DIR}${MINGW64_SHELL}"
+
+MINGW32_HERE_PATH="${PWD_WIN_ESCAPED}${MINGW32_HERE}"
+MINGW64_HERE_PATH="${PWD_WIN_ESCAPED}${MINGW64_HERE}"
+MSYS2_HERE_PATH="${PWD_WIN_ESCAPED}${MSYS2_HERE}"
+
+cat bash_here.template | sed -e "s/{SHELL_PATH_WIN}/$MINGW32_SHELL_PATH/g" | sed 's/$/\r/' > $MINGW32_HERE
+cat bash_here.template | sed -e "s/{SHELL_PATH_WIN}/$MINGW64_SHELL_PATH/g" | sed 's/$/\r/' > $MINGW64_HERE
+cat bash_here.template | sed -e "s/{SHELL_PATH_WIN}/$MSYS2_SHELL_PATH/g"   | sed 's/$/\r/' > $MSYS2_HERE
+
+
+MINGW32_HERE_PATH=$(echo $MINGW32_HERE_PATH | sed 's/\\/\\\\/g')
+MINGW64_HERE_PATH=$(echo $MINGW64_HERE_PATH | sed 's/\\/\\\\/g')
+MSYS2_HERE_PATH=$(echo $MSYS2_HERE_PATH | sed 's/\\/\\\\/g')
+
+cat reg.template | sed 's/$/\r/' > $REG_FILE
+cat reg_mingw32.template | sed -e "s/{SCRIPT_HERE_PATH_WIN}/$MINGW32_HERE_PATH/g" | sed 's/$/\r/' >> $REG_FILE 
+cat reg_mingw64.template | sed -e "s/{SCRIPT_HERE_PATH_WIN}/$MINGW64_HERE_PATH/g" | sed 's/$/\r/' >> $REG_FILE
+cat reg_msys2.template | sed -e "s/{SCRIPT_HERE_PATH_WIN}/$MSYS2_HERE_PATH/g"     | sed 's/$/\r/' >> $REG_FILE
+
+echo "Done!"
+
+echo 
+echo -e "${COL_MAGENTA}"
+echo -e "!!!IMPORTANT!!!"
+echo -e "Please merge the file ${REG_FILE}"
+echo -e "by double-clicking on it to finish the installation"
+echo -e "${COL_RESET}"
+echo 
+
+exit 0
