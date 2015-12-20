@@ -2,5 +2,5 @@
 @="MSYS2 Bash Here"
 
 [HKEY_CLASSES_ROOT\Directory\Background\shell\msys2\command]
-@="cmd /U /C \"{SCRIPT_HERE_PATH_WIN} %v\""
+@="cmd /U /C \"{SCRIPT_HERE_PATH_WIN} \"%v\"\""
 
