@@ -1,4 +1,4 @@
 @echo off
 @echo Swithching to %*
 SET destdir=%*
-C:\Windows\System32\cmd.exe /U /Q /K {SHELL_PATH_WIN} -c 'destdir=`eval echo ${destdir}`; cd "${destdir}"; exec bash --init-file ~/.bash_profile'
+C:\Windows\System32\cmd.exe /U /Q /K {SHELL_PATH_WIN} -c 'destdir=$(echo ${destdir:1:${#destdir}-2}); cd "${destdir}"; exec bash --init-file ~/.bash_profile'
