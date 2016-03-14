@@ -4,6 +4,7 @@ the Windows right-click shortcut menu. This implementation should work for
 MSYS2 and MINGW32/64.
 
 ### Usage
+0. Make sure environment variable %HOME% exists. (This script will source %HOME%/.bash_profile)
 1. `git clone git@github.com:njzhangyifei/msys2-mingw-shortcut-menus.git` into
    your desired directory to install
    - Or `git clone https://github.com/njzhangyifei/msys2-mingw-shortcut-menus.git` when git via ssh is not available
