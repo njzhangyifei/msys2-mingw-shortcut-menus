@@ -6,6 +6,7 @@ MSYS2 and MINGW32/64.
 ### Usage
 1. `git clone git@github.com:njzhangyifei/msys2-mingw-shortcut-menus.git` into
    your desired directory to install
+   - Or `git clone https://github.com/njzhangyifei/msys2-mingw-shortcut-menus.git` when git via ssh is not available
 2. `./install` and follow the instructions
 3. double-click `install_right_click_menu.reg` file to merge it into your
 windows registry
