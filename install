@@ -52,9 +52,11 @@ if [[ ! $option =~ [yY](es)* ]]; then
     exit 0
 fi
 
-TEMPLATE="bash_here.template"
+TEMPLATE_SHELL="bash"
+# TEMPLATE_SHELL="zsh"
+TEMPLATE="${TEMPLATE_SHELL}_here.template"
 if [[ -f /start_shell.cmd ]]; then
-    TEMPLATE="bash_here_start_shell.template"
+    TEMPLATE="${TEMPLATE_SHELL}_here_start_shell.template"
     echo -e "Using MSYS2 version with start_shell.cmd"
 fi
 
