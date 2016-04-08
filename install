@@ -27,6 +27,7 @@ echo -e "${COL_WHITE}Checking environment...${COL_RESET}"
 if ! ( \
     [ -s install ] && \
     [ -s bash_here.template ] && \
+    [ -s bash_here_start_shell.template ] && \
     [ -s reg.template ] && \
     [ -s reg_mingw64.template ] && \
     [ -s reg_mingw32.template ] && \
@@ -51,6 +52,12 @@ if [[ ! $option =~ [yY](es)* ]]; then
     exit 0
 fi
 
+TEMPLATE="bash_here.template"
+if [[ -f /start_shell.cmd ]]; then
+    TEMPLATE="bash_here_start_shell.template"
+    echo -e "Using MSYS2 version with start_shell.cmd"
+fi
+
 echo -e -n "${COL_WHITE}Generating scripts...${COL_RESET}"
 
 MINGW32_SHELL="mingw32_shell.bat"
@@ -71,10 +78,9 @@ MINGW32_HERE_PATH="${PWD_WIN_ESCAPED}${MINGW32_HERE}"
 MINGW64_HERE_PATH="${PWD_WIN_ESCAPED}${MINGW64_HERE}"
 MSYS2_HERE_PATH="${PWD_WIN_ESCAPED}${MSYS2_HERE}"
 
-cat bash_here.template | sed -e "s/{SHELL_PATH_WIN}/$MINGW32_SHELL_PATH/g" | sed 's/$/\r/' > $MINGW32_HERE
-cat bash_here.template | sed -e "s/{SHELL_PATH_WIN}/$MINGW64_SHELL_PATH/g" | sed 's/$/\r/' > $MINGW64_HERE
-cat bash_here.template | sed -e "s/{SHELL_PATH_WIN}/$MSYS2_SHELL_PATH/g"   | sed 's/$/\r/' > $MSYS2_HERE
-
+cat $TEMPLATE | sed -e "s/{SHELL_PATH_WIN}/$MINGW32_SHELL_PATH/g" | sed 's/$/\r/' > $MINGW32_HERE
+cat $TEMPLATE | sed -e "s/{SHELL_PATH_WIN}/$MINGW64_SHELL_PATH/g" | sed 's/$/\r/' > $MINGW64_HERE
+cat $TEMPLATE | sed -e "s/{SHELL_PATH_WIN}/$MSYS2_SHELL_PATH/g"   | sed 's/$/\r/' > $MSYS2_HERE
 
 MINGW32_HERE_PATH=$(echo $MINGW32_HERE_PATH | sed 's/\\/\\\\/g')
 MINGW64_HERE_PATH=$(echo $MINGW64_HERE_PATH | sed 's/\\/\\\\/g')
