@@ -1,5 +1,6 @@
 [HKEY_CLASSES_ROOT\Directory\Background\shell\msys2]
 @="MSYS2 Bash Here"
+"Icon"="\"{MSYS2_INSTALL_DIR}msys2.ico\""
 
 [HKEY_CLASSES_ROOT\Directory\Background\shell\msys2\command]
 @="cmd /U /C \"{SCRIPT_HERE_PATH_WIN} \"%v\"\""
