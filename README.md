@@ -21,8 +21,14 @@ This implementation should work for MSYS2 and MINGW32/64 shells that come with M
 4. **(Optional)** If you don't see icons in the context menu, please install `msys2-launcher`
    via pacman (`pacman -S msys/msys2-launcher-git`) or from source https://github.com/elieux/msys2-launcher
 
+
 ### Note
 - This script does NOT depend on `cygpath`.
+- If you are using msys2 with filesystem newer than 2016.05-2, this script will
+   only generate one `.reg` file. That's **ALL** you need to create this context
+   menu. You can delete this directory after merging the `.reg` file.
+
+### Note (For msys2 version with start_shell.cmd)
 - For the MSYS2 version with `start_shell.cmd`, the script will 
   use `bash_here_start_shell.template` for generating bash scripts.
   - You **MUST** have environmental variable `$HOME` defined as 
