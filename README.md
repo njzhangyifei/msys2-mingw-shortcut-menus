@@ -8,7 +8,7 @@ This implementation should work for MSYS2 and MINGW32/64 shells that come with M
 ![screenshot](https://cloud.githubusercontent.com/assets/2238599/15538737/d9d1e3a2-2232-11e6-9426-42c62c69925c.png)
 
 
-### Usage
+## Usage
 0. Make sure environment variable `%HOME%` exists. 
    (This script will source `%HOME%/.bash_profile`)
 1. `git clone git@github.com:njzhangyifei/msys2-mingw-shortcut-menus.git` into
@@ -22,8 +22,12 @@ This implementation should work for MSYS2 and MINGW32/64 shells that come with M
    via pacman (`pacman -S msys/msys2-launcher-git`) or from source https://github.com/elieux/msys2-launcher
 
 
-### Note
+## Note (TL;DR)
 - This script does NOT depend on `cygpath`.
+- If you are using Zsh, please copy-and-edit a `msys2_shell_zsh.cmd` in your
+   MSYS2 install directory. You will also need to change `TEMPLATE_SHELL` in the
+   install script to `zsh`. For example template, please see 
+   `reg_aio_zsh_msys2_shell_example.template`.
 - If you are using msys2 with filesystem newer than 2016.05-2, this script will
    only generate one `.reg` file. That's **ALL** you need to create this context
    menu. You can delete this directory after merging the `.reg` file.
@@ -38,5 +42,5 @@ This implementation should work for MSYS2 and MINGW32/64 shells that come with M
   to modify either the template or the bash script generated to call the
   corresponding batch file.
 
-### License
+## License
 The MIT License (MIT) 2015 Yifei Zhang
