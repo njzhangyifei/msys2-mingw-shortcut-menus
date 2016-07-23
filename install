@@ -109,8 +109,16 @@ else
     echo "You can delete this directory after merging the reg file"
     MSYS2_INSTALL_DIR=$(echo $MSYS2_INSTALL_DIR | sed 's/\\/\\\\/g')
     cat reg_aio_${TEMPLATE_SHELL}_msys2_shell.template | sed -e "s/{MSYS2_INSTALL_DIR}/$MSYS2_INSTALL_DIR/g" | sed 's/$/\r/' > $REG_FILE 
+
+    FILESYSTEM_VERSION=$(pacman -Q filesystem | cut -d " " -f 2)
+    echo "Filesystem version: ${FILESYSTEM_VERSION}"
+    if [[ $(vercmp $FILESYSTEM_VERSION '2016.07-2') -ge 0 ]]; then
+        cat $REG_FILE | sed -e 's/\-here/\-where/g' > ${REG_FILE}.tmp
+        mv ${REG_FILE}.tmp $REG_FILE
+    fi
 fi
 
+echo
 echo "Done!"
 
 echo 
@@ -120,5 +128,7 @@ echo -e "Please merge the file ${REG_FILE}"
 echo -e "by double-clicking on it to finish the installation"
 echo -e "${COL_RESET}"
 echo 
+
+start ${REG_FILE}
 
 exit 0
