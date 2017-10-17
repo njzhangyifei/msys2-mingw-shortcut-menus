@@ -66,7 +66,7 @@ if [[ -f /start_shell.cmd ]]; then
 fi
 
 REG_FILE="install_right_click_menu.reg"
-echo -e "${COL_WHITE}Generating scripts...${COL_RESET}"
+echo -e "${COL_WHITE}Generating install scripts...${COL_RESET}"
 if ( \
     [ -s mingw32_shell.bat ] && \
     [ -s mingw64_shell.bat ] && \
@@ -101,14 +101,14 @@ if ( \
     MSYS2_INSTALL_DIR=$(echo $MSYS2_INSTALL_DIR | sed 's/\\/\\\\/g')
 
     cat reg.template | sed 's/$/\r/' > $REG_FILE
-    cat reg_mingw32.template | sed -e "s/{SCRIPT_HERE_PATH_WIN}/$MINGW32_HERE_PATH/g" | sed -e "s/{MSYS2_INSTALL_DIR}/$MSYS2_INSTALL_DIR/g" | sed 's/$/\r/' >> $REG_FILE 
+    cat reg_mingw32.template | sed -e "s/{SCRIPT_HERE_PATH_WIN}/$MINGW32_HERE_PATH/g" | sed -e "s/{MSYS2_INSTALL_DIR}/$MSYS2_INSTALL_DIR/g" | sed 's/$/\r/' >> $REG_FILE
     cat reg_mingw64.template | sed -e "s/{SCRIPT_HERE_PATH_WIN}/$MINGW64_HERE_PATH/g" | sed -e "s/{MSYS2_INSTALL_DIR}/$MSYS2_INSTALL_DIR/g" | sed 's/$/\r/' >> $REG_FILE
     cat reg_msys2.template | sed -e "s/{SCRIPT_HERE_PATH_WIN}/$MSYS2_HERE_PATH/g" | sed -e "s/{MSYS2_INSTALL_DIR}/$MSYS2_INSTALL_DIR/g" | sed 's/$/\r/' >> $REG_FILE
 else
     echo "Using all-in-one reg file template"
     echo "You can delete this directory after merging the reg file"
     MSYS2_INSTALL_DIR=$(echo $MSYS2_INSTALL_DIR | sed 's/\\/\\\\/g')
-    cat reg_aio_${TEMPLATE_SHELL}_msys2_shell.template | sed -e "s/{MSYS2_INSTALL_DIR}/$MSYS2_INSTALL_DIR/g" | sed 's/$/\r/' > $REG_FILE 
+    cat reg_aio_${TEMPLATE_SHELL}_msys2_shell.template | sed -e "s/{MSYS2_INSTALL_DIR}/$MSYS2_INSTALL_DIR/g" | sed 's/$/\r/' > $REG_FILE
 
     FILESYSTEM_VERSION=$(pacman -Q filesystem | cut -d " " -f 2)
     echo "Filesystem version: ${FILESYSTEM_VERSION}"
@@ -119,16 +119,31 @@ else
 fi
 
 echo
-echo "Done!"
+echo -e "${COL_WHITE}Generating uninstall scripts...${COL_RESET}"
+UNINS_REG_FILE="uninstall_right_click_menu.reg"
+cat <<EOF >${UNINS_REG_FILE}
+Windows Registry Editor Version 5.00
 
-echo 
+[-HKEY_CLASSES_ROOT\Directory\Background\shell\mingw32]
+
+[-HKEY_CLASSES_ROOT\Directory\Background\shell\mingw64]
+
+[-HKEY_CLASSES_ROOT\Directory\Background\shell\msys2]
+EOF
+
+echo
 echo -e "${COL_MAGENTA}"
-echo -e "!!!IMPORTANT!!!"
-echo -e "Please merge the file ${REG_FILE}"
-echo -e "by double-clicking on it to finish the installation"
+echo -e "Almost done!"
+echo -e "Look for the User Account Control promt flsahing in the Task Bar."
+echo -e "The Registry Editor is requesting your permission to install the"
+echo -e "generated registy entries. Launch the request, select yes and follow"
+echo -e "the Registry Editor promts to finish the installation"
 echo -e "${COL_RESET}"
-echo 
+echo
 
 start ${REG_FILE}
+
+echo
+echo "Done!"
 
 exit 0

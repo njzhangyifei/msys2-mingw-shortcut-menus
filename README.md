@@ -9,18 +9,23 @@ This implementation should work for MSYS2 and MINGW32/64 shells that come with M
 
 
 ## Usage
-0. Make sure environment variable `%HOME%` exists. 
-   (This script will source `%HOME%/.bash_profile`)
-1. `git clone git@github.com:njzhangyifei/msys2-mingw-shortcut-menus.git` into
+0. Make sure the environment variable `$HOME` exists and points to `/home/<userid>` from your MSYS2/bash console. 
+   (This script will source `$HOME/.bash_profile`)
+1. `$ git clone git@github.com:njzhangyifei/msys2-mingw-shortcut-menus.git` into
    your desired directory to install
    - Or `git clone https://github.com/njzhangyifei/msys2-mingw-shortcut-menus.git`
    when git via ssh is not available
-2. `./install` and follow the instructions
-3. double-click `install_right_click_menu.reg` file to merge it into your
-   windows registry
+2. `$ ./install` and follow the instructions
+3. **(Optional)** double-click `install_right_click_menu.reg` file to merge it into your
+   windows registry if not automatically merged by the install script.
 4. **(Optional)** If you don't see icons in the context menu, please install `msys2-launcher`
    via pacman (`pacman -S msys/msys2-launcher-git`) or from source https://github.com/elieux/msys2-launcher
 
+## Note (Manually add Context Menu shortcuts)
+- Double-click `install_right_click_menu.reg` and follow the Registry Editor prompts.
+
+## Note (Manually remove Context Menu shortcuts)
+- Double-click `uninstall_right_click_menu.reg` and follow the Registry Editor prompts.
 
 ## Note (TL;DR)
 - This script does NOT depend on `cygpath`.
