@@ -15,7 +15,7 @@ This implementation should work for MSYS2 and MINGW32/64 shells that come with M
    your desired directory to install
    - Or `git clone https://github.com/njzhangyifei/msys2-mingw-shortcut-menus.git`
    when git via ssh is not available
-2. `./install` and follow the instructions
+2. `./install` and follow the instructions. Use `./install --user` for current user only
 3. double-click `install_right_click_menu.reg` file to merge it into your
    windows registry
 4. **(Optional)** If you don't see icons in the context menu, please install `msys2-launcher`

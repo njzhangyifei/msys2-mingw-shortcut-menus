@@ -68,6 +68,7 @@ else
 	ROOT_KEY="HKEY_LOCAL_MACHINE"
 	echo -e "${COL_GREEN}"
 	echo -e "Configuration will be stored for all users on this machine ('HKEY_LOCAL_MACHINE')"
+	echo -e "If this is not working, run this script again appending --user for user context only"
 	echo -e "${COL_RESET}"
 fi
 
