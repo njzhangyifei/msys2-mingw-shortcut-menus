@@ -1,7 +1,7 @@
-[HKEY_CLASSES_ROOT\Directory\Background\shell\mingw32]
+[{ROOT_KEY}\Software\Classes\Directory\Background\shell\mingw32]
 @="MinGW &32 Bash Here"
 "Icon"="\"{MSYS2_INSTALL_DIR}mingw32.exe\""
 
-[HKEY_CLASSES_ROOT\Directory\Background\shell\mingw32\command]
+[{ROOT_KEY}\Software\Classes\Directory\Background\shell\mingw32\command]
 @="cmd /U /C \"{SCRIPT_HERE_PATH_WIN} \"%v\"\""
 

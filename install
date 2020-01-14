@@ -59,6 +59,18 @@ if [[ ! $option =~ [yY](es)* ]]; then
     exit 0
 fi
 
+if [ "$1" = '--user' ]; then
+	ROOT_KEY="HKEY_CURRENT_USER"
+	echo -e "${COL_GREEN}"
+	echo -e "Configuration will be stored in user context only ('HKEY_CURRENT_USER')"
+	echo -e "${COL_RESET}"
+else
+	ROOT_KEY="HKEY_LOCAL_MACHINE"
+	echo -e "${COL_GREEN}"
+	echo -e "Configuration will be stored for all users on this machine ('HKEY_LOCAL_MACHINE')"
+	echo -e "${COL_RESET}"
+fi
+
 TEMPLATE="${TEMPLATE_SHELL}_here.template"
 if [[ -f /start_shell.cmd ]]; then
     TEMPLATE="${TEMPLATE_SHELL}_here_start_shell.template"
@@ -101,14 +113,14 @@ if ( \
     MSYS2_INSTALL_DIR=$(echo $MSYS2_INSTALL_DIR | sed 's/\\/\\\\/g')
 
     cat reg.template | sed 's/$/\r/' > $REG_FILE
-    cat reg_mingw32.template | sed -e "s/{SCRIPT_HERE_PATH_WIN}/$MINGW32_HERE_PATH/g" | sed -e "s/{MSYS2_INSTALL_DIR}/$MSYS2_INSTALL_DIR/g" | sed 's/$/\r/' >> $REG_FILE 
-    cat reg_mingw64.template | sed -e "s/{SCRIPT_HERE_PATH_WIN}/$MINGW64_HERE_PATH/g" | sed -e "s/{MSYS2_INSTALL_DIR}/$MSYS2_INSTALL_DIR/g" | sed 's/$/\r/' >> $REG_FILE
-    cat reg_msys2.template | sed -e "s/{SCRIPT_HERE_PATH_WIN}/$MSYS2_HERE_PATH/g" | sed -e "s/{MSYS2_INSTALL_DIR}/$MSYS2_INSTALL_DIR/g" | sed 's/$/\r/' >> $REG_FILE
+    cat reg_mingw32.template | sed -e "s/{SCRIPT_HERE_PATH_WIN}/$MINGW32_HERE_PATH/g" | sed -e "s/{MSYS2_INSTALL_DIR}/$MSYS2_INSTALL_DIR/g" | sed -e "s/{ROOT_KEY}/$ROOT_KEY/g" | sed 's/$/\r/' >> $REG_FILE 
+    cat reg_mingw64.template | sed -e "s/{SCRIPT_HERE_PATH_WIN}/$MINGW64_HERE_PATH/g" | sed -e "s/{MSYS2_INSTALL_DIR}/$MSYS2_INSTALL_DIR/g" | sed -e "s/{ROOT_KEY}/$ROOT_KEY/g" | sed 's/$/\r/' >> $REG_FILE
+    cat reg_msys2.template | sed -e "s/{SCRIPT_HERE_PATH_WIN}/$MSYS2_HERE_PATH/g" | sed -e "s/{MSYS2_INSTALL_DIR}/$MSYS2_INSTALL_DIR/g" | sed -e "s/{ROOT_KEY}/$ROOT_KEY/g" | sed 's/$/\r/' >> $REG_FILE
 else
     echo "Using all-in-one reg file template"
     echo "You can delete this directory after merging the reg file"
     MSYS2_INSTALL_DIR=$(echo $MSYS2_INSTALL_DIR | sed 's/\\/\\\\/g')
-    cat reg_aio_${TEMPLATE_SHELL}_msys2_shell.template | sed -e "s/{MSYS2_INSTALL_DIR}/$MSYS2_INSTALL_DIR/g" | sed 's/$/\r/' > $REG_FILE 
+    cat reg_aio_${TEMPLATE_SHELL}_msys2_shell.template | sed -e "s/{MSYS2_INSTALL_DIR}/$MSYS2_INSTALL_DIR/g" | sed -e "s/{ROOT_KEY}/$ROOT_KEY/g" | sed 's/$/\r/' > $REG_FILE 
 
     FILESYSTEM_VERSION=$(pacman -Q filesystem | cut -d " " -f 2)
     echo "Filesystem version: ${FILESYSTEM_VERSION}"
