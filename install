@@ -124,11 +124,21 @@ UNINS_REG_FILE="uninstall_right_click_menu.reg"
 cat <<EOF >${UNINS_REG_FILE}
 Windows Registry Editor Version 5.00
 
+;; THIS SECTION removes right-click on folder background options.
 [-HKEY_CLASSES_ROOT\Directory\Background\shell\mingw32]
 
 [-HKEY_CLASSES_ROOT\Directory\Background\shell\mingw64]
 
 [-HKEY_CLASSES_ROOT\Directory\Background\shell\msys2]
+
+
+;; THIS SECTION removes right-click on folder options.
+[-HKEY_CLASSES_ROOT\Directory\shell\mingw32]
+
+[-HKEY_CLASSES_ROOT\Directory\shell\mingw64]
+
+[-HKEY_CLASSES_ROOT\Directory\shell\msys2]
+
 EOF
 
 echo
