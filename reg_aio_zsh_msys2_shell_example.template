@@ -1,5 +1,6 @@
 Windows Registry Editor Version 5.00
 
+;; THIS SECTION is for right-click on a folder background.
 [HKEY_CLASSES_ROOT\Directory\Background\shell\mingw32]
 @="MinGW [&3]2 Zsh Here"
 "Icon"="\"{MSYS2_INSTALL_DIR}mingw32.exe\""
@@ -21,3 +22,25 @@ Windows Registry Editor Version 5.00
 [HKEY_CLASSES_ROOT\Directory\Background\shell\msys2\command]
 @="{MSYS2_INSTALL_DIR}msys2_shell_zsh.cmd -msys -here \"%v\""
 
+
+;; THIS SECTION is for right-click on a folder.
+[HKEY_CLASSES_ROOT\Directory\shell\mingw32]
+@="MinGW [&3]2 Zsh Here"
+"Icon"="\"{MSYS2_INSTALL_DIR}mingw32.exe\""
+
+[HKEY_CLASSES_ROOT\Directory\shell\mingw32\command]
+@="{MSYS2_INSTALL_DIR}msys2_shell_zsh.cmd -mingw32 -here \"%v\""
+
+[HKEY_CLASSES_ROOT\Directory\shell\mingw64]
+@="MinGW 64 Z[&s]h Here"
+"Icon"="\"{MSYS2_INSTALL_DIR}mingw64.exe\""
+
+[HKEY_CLASSES_ROOT\Directory\shell\mingw64\command]
+@="{MSYS2_INSTALL_DIR}msys2_shell_zsh.cmd -mingw64 -here \"%v\""
+
+[HKEY_CLASSES_ROOT\Directory\shell\msys2]
+@="[&M]SYS2 Zsh Here"
+"Icon"="\"{MSYS2_INSTALL_DIR}msys2.ico\""
+
+[HKEY_CLASSES_ROOT\Directory\shell\msys2\command]
+@="{MSYS2_INSTALL_DIR}msys2_shell_zsh.cmd -msys -here \"%v\""

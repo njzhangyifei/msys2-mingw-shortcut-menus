@@ -1,6 +1,5 @@
 # Right click "Bash-here" Shortcut in Context Menu for MSYS2 MINGW32/64 shell
-This is all the configuration files needed for adding "bash here" options in 
-the Windows right-click shortcut/context menu. 
+This is all the configuration files needed for adding "bash here" options in the Windows right-click shortcut/context menu. The menu options will be made available for both right-click on a folder background and [right-click on a folder](https://gist.github.com/magthe/a60293fe395af7245a9e#gistcomment-3164952).
 
 This implementation should work for MSYS2 and MINGW32/64 shells that come with MSYS2.
 
@@ -9,8 +8,7 @@ This implementation should work for MSYS2 and MINGW32/64 shells that come with M
 
 
 ## Usage
-0. Make sure the environment variable `$HOME` exists and points to `/home/<userid>` from your MSYS2/bash console. 
-   (This script will source `$HOME/.bash_profile`)
+0. Make sure the environment variable `$HOME` exists and points to `/home/<userid>` from your MSYS2/bash console. To test this, opening an MSYS2/bash console, and type and run this command: `echo $HOME`. If it prints a valid path, the variable exists with a valid value. If it does not print a path, you need to fix up your install to include a `$HOME` environment variable (out of scope of this document). This is needed because this script will source `$HOME/.bash_profile`. Then, from an MSYS2/bash console, run these commands:
 1. `$ git clone git@github.com:njzhangyifei/msys2-mingw-shortcut-menus.git` into
    your desired directory to install
    - Or `git clone https://github.com/njzhangyifei/msys2-mingw-shortcut-menus.git`
