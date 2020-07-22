@@ -1,4 +1,4 @@
-;; THIS SECTION is for right-clock on a folder background.
+;; THIS SECTION is for right-click on a folder background.
 [HKEY_CLASSES_ROOT\Directory\Background\shell\msys2]
 @="MSYS2 Bash Here"
 "Icon"="\"{MSYS2_INSTALL_DIR}msys2.ico\""
@@ -7,7 +7,7 @@
 @="cmd /U /C \"{SCRIPT_HERE_PATH_WIN} \"%v\"\""
 
 
-;; THIS SECTION is for right-clock on a folder.
+;; THIS SECTION is for right-click on a folder.
 [HKEY_CLASSES_ROOT\Directory\shell\msys2]
 @="MSYS2 Bash Here"
 "Icon"="\"{MSYS2_INSTALL_DIR}msys2.ico\""
