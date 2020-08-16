@@ -1,3 +1,4 @@
+;; THIS SECTION is for right-click on a folder background.
 [HKEY_CLASSES_ROOT\Directory\Background\shell\mingw64]
 @="MinGW 64 Ba&sh Here"
 "Icon"="\"{MSYS2_INSTALL_DIR}mingw64.exe\""
@@ -5,3 +6,11 @@
 [HKEY_CLASSES_ROOT\Directory\Background\shell\mingw64\command]
 @="cmd /U /C \"{SCRIPT_HERE_PATH_WIN} \"%v\"\""
 
+
+;; THIS SECTION is for right-click on a folder.
+[HKEY_CLASSES_ROOT\Directory\shell\mingw64]
+@="MinGW 64 Ba&sh Here"
+"Icon"="\"{MSYS2_INSTALL_DIR}mingw64.exe\""
+
+[HKEY_CLASSES_ROOT\Directory\shell\mingw64\command]
+@="cmd /U /C \"{SCRIPT_HERE_PATH_WIN} \"%v\"\""
