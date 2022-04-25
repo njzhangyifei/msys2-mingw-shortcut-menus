@@ -1,0 +1,6 @@
+[{ROOT_KEY}\Software\Classes\Directory\Background\shell\clang32]
+@="Clang 32 Bash Here"
+"Icon"="\"{MSYS2_INSTALL_DIR}clang32.ico\""
+
+[{ROOT_KEY}\Software\Classes\Directory\Background\shell\clang32\command]
+@="{MSYS2_INSTALL_DIR}msys2_shell.cmd -clang32 -here \"%v\""

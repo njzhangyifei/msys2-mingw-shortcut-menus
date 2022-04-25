@@ -1,0 +1,6 @@
+[{ROOT_KEY}\Software\Classes\Directory\Background\shell\ucrt64]
+@="UCRT 64 Bash Here"
+"Icon"="\"{MSYS2_INSTALL_DIR}ucrt64.ico\""
+
+[{ROOT_KEY}\Software\Classes\Directory\Background\shell\ucrt64\command]
+@="{MSYS2_INSTALL_DIR}msys2_shell.cmd -ucrt64 -here \"%v\""
