@@ -3,5 +3,4 @@
 "Icon"="\"{MSYS2_INSTALL_DIR}msys2.ico\""
 
 [{ROOT_KEY}\Software\Classes\Directory\Background\shell\msys2\command]
-@="cmd /U /C \"{SCRIPT_HERE_PATH_WIN} \"%v\"\""
-
+@="{MSYS2_INSTALL_DIR}msys2_shell.cmd -msys -here \"%v\""

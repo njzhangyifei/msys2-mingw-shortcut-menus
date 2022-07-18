@@ -1,0 +1,6 @@
+[{ROOT_KEY}\Software\Classes\Directory\Background\shell\clangarm64]
+@="ClangArm 64 Bash Here"
+"Icon"="\"{MSYS2_INSTALL_DIR}clangarm64.ico\""
+
+[{ROOT_KEY}\Software\Classes\Directory\Background\shell\clangarm64\command]
+@="{MSYS2_INSTALL_DIR}msys2_shell.cmd -clangarm64 -here \"%v\""

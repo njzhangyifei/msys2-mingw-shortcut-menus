@@ -34,6 +34,10 @@ if ! ( \
     [ -s bash_here_start_shell.template ] && \
     [ -s reg_aio_${TEMPLATE_SHELL}_msys2_shell.template ] && \
     [ -s reg.template ] && \
+    [ -s reg_clang32.template ] && \
+    [ -s reg_clang64.template ] && \
+    [ -s reg_clangarm64.template ] && \
+    [ -s reg_ucrt64.template ] && \
     [ -s reg_mingw64.template ] && \
     [ -s reg_mingw32.template ] && \
     [ -s reg_msys2.template ]); then
@@ -81,6 +85,10 @@ fi
 REG_FILE="install_right_click_menu.reg"
 echo -e "${COL_WHITE}Generating scripts...${COL_RESET}"
 if ( \
+    [ -s clang32_shell.bat ] && \
+    [ -s clang64_shell.bat ] && \
+    [ -s clangarm64_shell.bat ] && \
+    [ -s ucrt64.bat ] && \
     [ -s mingw32_shell.bat ] && \
     [ -s mingw64_shell.bat ] && \
     [ -s msys2_shell.bat ]); then
@@ -90,26 +98,50 @@ if ( \
     MINGW32_SHELL="mingw32_shell.bat"
     MINGW64_SHELL="mingw64_shell.bat"
     MSYS2_SHELL="msys2_shell.bat"
-
+    CLANGARM64_SHELL="clangarm64_shell.bat"
+    CLANG32_SHELL="clang32_shell.bat"
+    CLANG64_SHELL="clang64_shell.bat"
+    UCRT64_SHELL="ucrt64_shell.bat"
+    
     MINGW32_HERE="mingw32_here.bat"
     MINGW64_HERE="mingw64_here.bat"
     MSYS2_HERE="msys2_here.bat"
+    CLANGARM64_HERE="clangarm64_here.bat"
+    CLANG32_HERE="clang32_here.bat"
+    CLANG64_HERE="clang64_here.bat"
+    UCRT64_HERE="ucrt64_here.bat"
 
     MINGW32_SHELL_PATH="${MSYS2_INSTALL_DIR}${MINGW32_SHELL}"
     MINGW64_SHELL_PATH="${MSYS2_INSTALL_DIR}${MINGW64_SHELL}"
     MSYS2_SHELL_PATH="${MSYS2_INSTALL_DIR}${MSYS2_SHELL}"
+    CLANGARM64_SHELL_PATH="${MSYS2_INSTALL_DIR}${CLANGARM64_SHELL}"
+    CLANG32_SHELL_PATH="${MSYS2_INSTALL_DIR}${CLANG32_SHELL}"
+    CLANG64_SHELL_PATH="${MSYS2_INSTALL_DIR}${CLANG64_SHELL}"
+    UCRT64_SHELL_PATH="${MSYS2_INSTALL_DIR}${UCRT64_SHELL}"
 
     MINGW32_HERE_PATH="${PWD_WIN_ESCAPED}${MINGW32_HERE}"
     MINGW64_HERE_PATH="${PWD_WIN_ESCAPED}${MINGW64_HERE}"
     MSYS2_HERE_PATH="${PWD_WIN_ESCAPED}${MSYS2_HERE}"
+    CLANGARM64_HERE_PATH="${PWD_WIN_ESCAPED}${CLANGARM64_HERE}"
+    CLANG32_HERE_PATH="${PWD_WIN_ESCAPED}${CLANG32_HERE}"
+    CLANG64_HERE_PATH="${PWD_WIN_ESCAPED}${CLANG64_HERE}"
+    UCRT64_HERE_PATH="${PWD_WIN_ESCAPED}${UCRT64_HERE}"
 
     cat $TEMPLATE | sed -e "s/{SHELL_PATH_WIN}/$MINGW32_SHELL_PATH/g" | sed 's/$/\r/' > $MINGW32_HERE
     cat $TEMPLATE | sed -e "s/{SHELL_PATH_WIN}/$MINGW64_SHELL_PATH/g" | sed 's/$/\r/' > $MINGW64_HERE
     cat $TEMPLATE | sed -e "s/{SHELL_PATH_WIN}/$MSYS2_SHELL_PATH/g"   | sed 's/$/\r/' > $MSYS2_HERE
+    cat $TEMPLATE | sed -e "s/{SHELL_PATH_WIN}/$CLANGARM64_SHELL_PATH/g"   | sed 's/$/\r/' > $CLANGARM64_HERE
+    cat $TEMPLATE | sed -e "s/{SHELL_PATH_WIN}/$CLANG32_SHELL_PATH/g"   | sed 's/$/\r/' > $CLANG32_HERE
+    cat $TEMPLATE | sed -e "s/{SHELL_PATH_WIN}/$CLANG64_SHELL_PATH/g"   | sed 's/$/\r/' > $CLANG64_HERE
+    cat $TEMPLATE | sed -e "s/{SHELL_PATH_WIN}/$UCRT64_SHELL_PATH/g"   | sed 's/$/\r/' > $UCRT64_HERE
 
     MINGW32_HERE_PATH=$(echo $MINGW32_HERE_PATH | sed 's/\\/\\\\/g')
     MINGW64_HERE_PATH=$(echo $MINGW64_HERE_PATH | sed 's/\\/\\\\/g')
     MSYS2_HERE_PATH=$(echo $MSYS2_HERE_PATH | sed 's/\\/\\\\/g')
+    CLANGARM64_HERE_PATH=$(echo $CLANGARM64_HERE_PATH | sed 's/\\/\\\\/g')
+    CLANG32_HERE_PATH=$(echo $CLANG32_HERE_PATH | sed 's/\\/\\\\/g')
+    CLANG64_HERE_PATH=$(echo $CLANG64_HERE_PATH | sed 's/\\/\\\\/g')
+    UCRT64_HERE_PATH=$(echo $UCRT64_HERE_PATH | sed 's/\\/\\\\/g')
 
     MSYS2_INSTALL_DIR=$(echo $MSYS2_INSTALL_DIR | sed 's/\\/\\\\/g')
 
@@ -117,6 +149,10 @@ if ( \
     cat reg_mingw32.template | sed -e "s/{SCRIPT_HERE_PATH_WIN}/$MINGW32_HERE_PATH/g" | sed -e "s/{MSYS2_INSTALL_DIR}/$MSYS2_INSTALL_DIR/g" | sed -e "s/{ROOT_KEY}/$ROOT_KEY/g" | sed 's/$/\r/' >> $REG_FILE 
     cat reg_mingw64.template | sed -e "s/{SCRIPT_HERE_PATH_WIN}/$MINGW64_HERE_PATH/g" | sed -e "s/{MSYS2_INSTALL_DIR}/$MSYS2_INSTALL_DIR/g" | sed -e "s/{ROOT_KEY}/$ROOT_KEY/g" | sed 's/$/\r/' >> $REG_FILE
     cat reg_msys2.template | sed -e "s/{SCRIPT_HERE_PATH_WIN}/$MSYS2_HERE_PATH/g" | sed -e "s/{MSYS2_INSTALL_DIR}/$MSYS2_INSTALL_DIR/g" | sed -e "s/{ROOT_KEY}/$ROOT_KEY/g" | sed 's/$/\r/' >> $REG_FILE
+    cat reg_clangarm64.template | sed -e "s/{SCRIPT_HERE_PATH_WIN}/$CLANGARM64_HERE_PATH/g" | sed -e "s/{MSYS2_INSTALL_DIR}/$MSYS2_INSTALL_DIR/g" | sed -e "s/{ROOT_KEY}/$ROOT_KEY/g" | sed 's/$/\r/' >> $REG_FILE
+    cat reg_clang32.template | sed -e "s/{SCRIPT_HERE_PATH_WIN}/$CLANG32_HERE_PATH/g" | sed -e "s/{MSYS2_INSTALL_DIR}/$MSYS2_INSTALL_DIR/g" | sed -e "s/{ROOT_KEY}/$ROOT_KEY/g" | sed 's/$/\r/' >> $REG_FILE
+    cat reg_clang64.template | sed -e "s/{SCRIPT_HERE_PATH_WIN}/$CLANG64_HERE_PATH/g" | sed -e "s/{MSYS2_INSTALL_DIR}/$MSYS2_INSTALL_DIR/g" | sed -e "s/{ROOT_KEY}/$ROOT_KEY/g" | sed 's/$/\r/' >> $REG_FILE
+    cat reg_ucrt64.template | sed -e "s/{SCRIPT_HERE_PATH_WIN}/$UCRT64_HERE_PATH/g" | sed -e "s/{MSYS2_INSTALL_DIR}/$MSYS2_INSTALL_DIR/g" | sed -e "s/{ROOT_KEY}/$ROOT_KEY/g" | sed 's/$/\r/' >> $REG_FILE
 else
     echo "Using all-in-one reg file template"
     echo "You can delete this directory after merging the reg file"

@@ -1,15 +1,36 @@
 Windows Registry Editor Version 5.00
 
+[{ROOT_KEY}\Software\Classes\Directory\Background\shell\clang32]
+@="Clang 32 Bash Here"
+"Icon"="\"{MSYS2_INSTALL_DIR}clang32.ico\""
+
+[{ROOT_KEY}\Software\Classes\Directory\Background\shell\clang32\command]
+@="{MSYS2_INSTALL_DIR}msys2_shell.cmd -clang32 -here \"%v\""
+
+[{ROOT_KEY}\Software\Classes\Directory\Background\shell\clang64]
+@="Clang 64 Bash Here"
+"Icon"="\"{MSYS2_INSTALL_DIR}clang64.ico\""
+
+[{ROOT_KEY}\Software\Classes\Directory\Background\shell\clang64\command]
+@="{MSYS2_INSTALL_DIR}msys2_shell.cmd -clang64 -here \"%v\""
+
+[{ROOT_KEY}\Software\Classes\Directory\Background\shell\clangarm64]
+@="ClangArm 64 Bash Here"
+"Icon"="\"{MSYS2_INSTALL_DIR}clangarm64.ico\""
+
+[{ROOT_KEY}\Software\Classes\Directory\Background\shell\clangarm64\command]
+@="{MSYS2_INSTALL_DIR}msys2_shell.cmd -clangarm64 -here \"%v\""
+
 [{ROOT_KEY}\Software\Classes\Directory\Background\shell\mingw32]
-@="MinGW &32 Bash Here"
-"Icon"="\"{MSYS2_INSTALL_DIR}mingw32.exe\""
+@="MinGW 32 Bash Here"
+"Icon"="\"{MSYS2_INSTALL_DIR}mingw32.ico\""
 
 [{ROOT_KEY}\Software\Classes\Directory\Background\shell\mingw32\command]
 @="{MSYS2_INSTALL_DIR}msys2_shell.cmd -mingw32 -here \"%v\""
 
 [{ROOT_KEY}\Software\Classes\Directory\Background\shell\mingw64]
-@="MinGW 64 Ba&sh Here"
-"Icon"="\"{MSYS2_INSTALL_DIR}mingw64.exe\""
+@="MinGW 64 Bash Here"
+"Icon"="\"{MSYS2_INSTALL_DIR}mingw64.ico\""
 
 [{ROOT_KEY}\Software\Classes\Directory\Background\shell\mingw64\command]
 @="{MSYS2_INSTALL_DIR}msys2_shell.cmd -mingw64 -here \"%v\""
@@ -21,3 +42,9 @@ Windows Registry Editor Version 5.00
 [{ROOT_KEY}\Software\Classes\Directory\Background\shell\msys2\command]
 @="{MSYS2_INSTALL_DIR}msys2_shell.cmd -msys -here \"%v\""
 
+[{ROOT_KEY}\Software\Classes\Directory\Background\shell\ucrt64]
+@="UCRT 64 Bash Here"
+"Icon"="\"{MSYS2_INSTALL_DIR}ucrt64.ico\""
+
+[{ROOT_KEY}\Software\Classes\Directory\Background\shell\ucrt64\command]
+@="{MSYS2_INSTALL_DIR}msys2_shell.cmd -ucrt64 -here \"%v\""
